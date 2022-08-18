@@ -7,6 +7,13 @@ main() {
     shouldReturnSameInstance(ServiceProvider().provideMovieService);
     shouldReturnSameInstance(ServiceProvider().provideRemoteMovieService);
   });
+
+  test("ServiceProvider should provide different instances of http.Client", () {
+    final serviceProvider = ServiceProvider();
+    final firstClient = serviceProvider.provideHttpClient();
+    final secondClient = serviceProvider.provideHttpClient();
+    expect(firstClient, isNot(secondClient));
+  });
 }
 
 void shouldReturnSameInstance(dynamic Function() getInstance) {

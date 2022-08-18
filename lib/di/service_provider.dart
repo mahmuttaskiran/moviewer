@@ -14,8 +14,6 @@ class ServiceProvider {
 
   http.Client provideHttpClient() => http.Client();
 
-  MovieService get movieService => _movieService;
-
   MovieDbApi provideMovieDbApi() => _movieDbApi;
 
   RemoteMovieService provideRemoteMovieService() => _removeMovieService;
