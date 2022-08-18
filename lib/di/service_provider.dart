@@ -1,9 +1,19 @@
 import 'package:moviewer/services/services.dart';
 
 class ServiceProvider {
-  static MovieDbApi provideMovieDbApi() => MovieDbApi();
+  static final _singletonInstance = ServiceProvider._internal();
 
-  static RemoteMovieService provideRemoteMovieService() => RemoteMovieService(provideMovieDbApi());
+  ServiceProvider._internal();
 
-  static MovieService provideMovieService() => provideRemoteMovieService();
+  factory ServiceProvider() => _singletonInstance;
+
+  late final _movieDbApi = MovieDbApi();
+  late final _removeMovieService = RemoteMovieService(_movieDbApi);
+  late final MovieService _movieService = _removeMovieService;
+
+  MovieDbApi provideMovieDbApi() => _movieDbApi;
+
+  RemoteMovieService provideRemoteMovieService() => _removeMovieService;
+
+  MovieService provideMovieService() => _movieService;
 }
