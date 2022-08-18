@@ -3,10 +3,8 @@ import 'dart:io';
 class BaseResponse {
   static const _unknownError = "Unknown error";
 
-  BaseResponse({required this.status, this.error});
-
   String? error;
-  int status;
+  late int status;
 
   bool get isSuccess => status == HttpStatus.ok;
 

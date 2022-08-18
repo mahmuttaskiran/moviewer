@@ -29,7 +29,6 @@ class MovieDetails extends BaseResponse {
   final List<SpokenLanguage> spokenLanguages;
 
   MovieDetails({
-    required int status,
     required this.adult,
     required this.backdropPath,
     required this.budget,
@@ -52,7 +51,7 @@ class MovieDetails extends BaseResponse {
     required this.productionCompanies,
     required this.productionCountries,
     required this.spokenLanguages,
-  }) : super(status: status);
+  });
 
   factory MovieDetails.fromHttpResponse(http.Response response) {
     return MovieDetails.fromJson(jsonDecode(response.body))
@@ -62,7 +61,6 @@ class MovieDetails extends BaseResponse {
 
   factory MovieDetails.fromJson(Map<String, dynamic> json) {
     return MovieDetails(
-      status: json['status'],
       adult: json['adult'],
       backdropPath: json['backdrop_path'],
       budget: json['budget'],
