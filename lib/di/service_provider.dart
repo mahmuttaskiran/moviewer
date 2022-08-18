@@ -1,3 +1,4 @@
+import 'package:http/http.dart' as http;
 import 'package:moviewer/services/services.dart';
 
 class ServiceProvider {
@@ -7,9 +8,13 @@ class ServiceProvider {
 
   factory ServiceProvider() => _singletonInstance;
 
-  late final _movieDbApi = MovieDbApi();
+  late final _movieDbApi = MovieDbApi(provideHttpClient());
   late final _removeMovieService = RemoteMovieService(_movieDbApi);
   late final MovieService _movieService = _removeMovieService;
+
+  http.Client provideHttpClient() => http.Client();
+
+  MovieService get movieService => _movieService;
 
   MovieDbApi provideMovieDbApi() => _movieDbApi;
 
