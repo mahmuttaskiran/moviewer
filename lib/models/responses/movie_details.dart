@@ -6,7 +6,7 @@ import 'package:moviewer/models/responses/base.dart';
 
 class MovieDetails extends BaseResponse {
   final bool adult;
-  final String backdropPath;
+  final String? backdropPath;
   final int budget;
   final List<Genre> genres;
   final String homepage;
