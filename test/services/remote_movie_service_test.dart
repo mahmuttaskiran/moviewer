@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'fake_responses.dart';
-import 'test_utils.dart';
+import 'utils.dart';
 
 void main() {
   test("RemoteMovieService should return MovieListResponse", () async {
