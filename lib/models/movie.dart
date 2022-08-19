@@ -13,7 +13,7 @@ class Movie {
   final double popularity;
   final int voteCount;
   final bool video;
-  final double voteAverage;
+  final num voteAverage;
 
   Movie({
     required this.posterPath,
