@@ -25,8 +25,9 @@ class MovieDetailsNotifier extends ChangeNotifier {
       } else {
         errorMessage = response.errorMessage;
       }
-    } catch (e) {
+    } catch (e, s) {
       errorMessage = e.toString();
+      debugPrintStack(stackTrace: s);
     } finally {
       isFetching = false;
       notifyListeners();
