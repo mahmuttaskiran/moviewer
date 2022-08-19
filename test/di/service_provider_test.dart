@@ -3,13 +3,13 @@ import 'package:moviewer/di/service_provider.dart';
 
 main() {
   test('ServiceProvider should return same instances for services', () {
-    shouldReturnSameInstance(ServiceProvider().provideMovieDbApi);
-    shouldReturnSameInstance(ServiceProvider().provideMovieService);
-    shouldReturnSameInstance(ServiceProvider().provideRemoteMovieService);
+    shouldReturnSameInstance(ServiceModuleDI().provideMovieDbApi);
+    shouldReturnSameInstance(ServiceModuleDI().provideMovieService);
+    shouldReturnSameInstance(ServiceModuleDI().provideRemoteMovieService);
   });
 
   test("ServiceProvider should provide different instances of http.Client", () {
-    final serviceProvider = ServiceProvider();
+    final serviceProvider = ServiceModuleDI();
     final firstClient = serviceProvider.provideHttpClient();
     final secondClient = serviceProvider.provideHttpClient();
     expect(firstClient, isNot(secondClient));
