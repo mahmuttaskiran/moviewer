@@ -46,11 +46,13 @@ extension on MovieDetails {
       "Status": "Released",
       "Original Language": originalLanguage,
       "Original Title": originalTitle,
-      "Production Companies": productionCompanies.map((company) => company.name).join(", "),
-      "Production Countries": productionCountries.map((country) => country.name).join(", "),
-      "Spoken Languages": spokenLanguages.map((language) => language.name).join(", "),
-      "Budget": budget.toString(),
-      "Revenue": revenue.toString(),
+      if (productionCompanies.isNotEmpty)
+        "Production Companies": productionCompanies.map((company) => company.name).join(", "),
+      if (productionCountries.isNotEmpty)
+        "Production Countries": productionCountries.map((country) => country.name).join(", "),
+      if (spokenLanguages.isNotEmpty) "Spoken Languages": spokenLanguages.map((language) => language.name).join(", "),
+      if (budget != 0) "Budget": budget.toString(),
+      if (revenue != 0) "Revenue": revenue.toString(),
     };
   }
 }
