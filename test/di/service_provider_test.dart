@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:moviewer/di/service_provider.dart';
+import 'package:moviewer/di/service_module.dart';
 
 main() {
   test('ServiceProvider should return same instances for services', () {
