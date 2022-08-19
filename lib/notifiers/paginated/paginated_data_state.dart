@@ -1,11 +1,11 @@
 class PaginatedDataState<T> {
-  List<T> data;
+  List<T> data = [];
   String errorMessage = '';
   bool isFetching = false;
 
   bool get hasError => errorMessage.isNotEmpty;
 
-  PaginatedDataState([this.data = const []]);
+  PaginatedDataState();
 
   void setInitialState() {
     data.clear();
