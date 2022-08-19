@@ -29,6 +29,11 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
         widget.movieNotifier.nextPage(textController.text);
       }
     });
+    widget.movieNotifier.addListener(_onMovieNotifierChange);
+  }
+
+  void _onMovieNotifierChange() {
+    if (mounted) setState(() {});
   }
 
   @override
@@ -45,12 +50,39 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
               style: textFieldStyle,
             ),
             const Divider(),
-            Expanded(
-              child: MovieList(
-                movieNotifier: widget.movieNotifier,
-                onMovieClick: (movie) {
-                  _navigationToMovieDetails(movie);
-                },
+            if (widget.movieNotifier.state.data.isEmpty && widget.movieNotifier.state.isFetching)
+              const Expanded(child: Center(child: CircularProgressIndicator()))
+            else if (widget.movieNotifier.state.data.isEmpty && !widget.movieNotifier.state.isFetching)
+              buildEmptyState()
+            else
+              Expanded(
+                child: MovieList(
+                  movieNotifier: widget.movieNotifier,
+                  onMovieClick: (movie) {
+                    _navigationToMovieDetails(movie);
+                  },
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildEmptyState() {
+    return Expanded(
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.face, size: 150),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'Find your favorite movie by typing in the search bar above.',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headline6,
               ),
             ),
           ],
@@ -72,5 +104,6 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
   void dispose() {
     super.dispose();
     textController.dispose();
+    widget.movieNotifier.removeListener(_onMovieNotifierChange);
   }
 }
