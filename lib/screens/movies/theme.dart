@@ -8,3 +8,14 @@ const searchInputHintTextStyle = InputDecoration(
 );
 
 const textFieldStyle = TextStyle(fontSize: 30);
+
+final movieTitleGradientDecoration = BoxDecoration(
+  gradient: LinearGradient(
+    begin: Alignment.bottomCenter,
+    end: Alignment.topCenter,
+    colors: [
+      Colors.black.withOpacity(0.8),
+      Colors.black.withOpacity(0.0),
+    ],
+  ),
+);

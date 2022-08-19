@@ -1,5 +1,7 @@
 
 class Movie {
+  static const _basePosterUrl = 'https://image.tmdb.org/t/p/w500';
+
   final String? posterPath;
   final bool adult;
   final String overview;
@@ -31,6 +33,9 @@ class Movie {
     required this.video,
     required this.voteAverage,
   });
+
+  String get posterUrl => '$_basePosterUrl$posterPath';
+  String get backdropUrl => '$_basePosterUrl$backdropPath';
 
   factory Movie.fromMap(Map<String, dynamic> map) => Movie(
         posterPath: map['poster_path'],

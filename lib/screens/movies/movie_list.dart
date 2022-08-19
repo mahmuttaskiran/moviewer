@@ -20,12 +20,27 @@ class MovieList extends StatelessWidget {
       value: movieNotifier,
       child: Consumer<MovieNotifier>(
         builder: (context, movieNotifier, child) {
-          return ListView.builder(
-            itemCount: movieNotifier.state.data.length,
-            itemBuilder: (context, index) {
-              final movie = movieNotifier.state.data[index];
-              return MovieWidget(movie: movie, onMovieClick: onMovieClick);
+          return NotificationListener<ScrollEndNotification>(
+            onNotification: (notification) {
+              if (notification.metrics.extentBefore == notification.metrics.maxScrollExtent &&
+                  !movieNotifier.pagination.hasReachedEnd) {
+                movieNotifier.nextPage(movieNotifier.pagination.query);
+              }
+              return false;
             },
+            child: ListView.builder(
+              itemCount: movieNotifier.state.data.length,
+              itemBuilder: (context, index) {
+                final movie = movieNotifier.state.data[index];
+                if (movieNotifier.state.isFetching && index == movieNotifier.state.data.length - 1) {
+                  return const Padding(
+                    padding: EdgeInsets.all(28.0),
+                    child: Center(child: CircularProgressIndicator()),
+                  );
+                }
+                return MovieWidget(movie: movie, onMovieClick: onMovieClick);
+              },
+            ),
           );
         },
       ),
