@@ -14,7 +14,7 @@ class RemoteMovieService with MovieService {
 
   @override
   Future<MovieListResponse> getMovies(String query, int page) async {
-    final response = await _movieDbApi.get('movie/search?query=$query&page=$page');
+    final response = await _movieDbApi.get('search/movie', body: {'query': query, 'page': page.toString()});
     return MovieListResponse.fromHttpResponse(response);
   }
 }
