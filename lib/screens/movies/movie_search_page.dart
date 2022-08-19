@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:moviewer/models/models.dart';
 import 'package:moviewer/notifiers/movie_notifier.dart';
+import 'package:moviewer/screens/movie_details/movie_details_page.dart';
 import 'package:moviewer/screens/movies/movie_list.dart';
 import 'package:moviewer/screens/movies/theme.dart';
 
@@ -47,12 +49,21 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
               child: MovieList(
                 movieNotifier: widget.movieNotifier,
                 onMovieClick: (movie) {
-                  // TODO: navigate to movie detail page
+                  _navigationToMovieDetails(movie);
                 },
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void _navigationToMovieDetails(Movie movie) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MovieDetailsPage(movie),
       ),
     );
   }

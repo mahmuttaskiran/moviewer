@@ -17,41 +17,45 @@ class MovieWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      child: Stack(children: [
-        CachedNetworkImage(
-          imageUrl: movie.posterUrl,
-          fit: BoxFit.cover,
-          height: 200,
-          width: double.infinity,
-          errorWidget: (context, url, error) => _buildErrorWidget(),
-        ),
-        Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            decoration: movieTitleGradientDecoration,
-            child: Text(
-              movie.title,
-              style: const TextStyle(color: Colors.white, fontSize: 20),
-              textAlign: TextAlign.center,
-            ),
+      child: InkWell(
+        onTap: () => onMovieClick(movie),
+        child: Stack(children: [
+          CachedNetworkImage(
+            imageUrl: movie.posterUrl,
+            fit: BoxFit.cover,
+            height: 200,
+            width: double.infinity,
+            errorWidget: (context, url, error) => buildErrorWidget(),
           ),
-        )
-      ]),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: movieTitleGradientDecoration,
+              child: Text(
+                movie.title,
+                style: const TextStyle(color: Colors.white, fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          )
+        ]),
+      ),
     );
   }
 
-  static Widget _buildErrorWidget() {
+  static Widget buildErrorWidget() {
     return Container(
       color: Colors.red,
       height: 200,
       child: const Padding(
         padding: EdgeInsets.only(top: 50),
         child: Align(
-            alignment: Alignment.topCenter,
-            child: Icon(Icons.image_not_supported_rounded, size: 50, color: Colors.white)),
+          alignment: Alignment.topCenter,
+          child: Icon(Icons.image_not_supported_rounded, size: 50, color: Colors.white),
+        ),
       ),
     );
   }
